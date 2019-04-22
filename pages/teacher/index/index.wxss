@@ -1,0 +1,16 @@
+.col-class{
+
+   height:5em;
+   
+   background-color: green;
+   color: white;
+   margin:0.5em;
+
+}
+.row-class{
+
+  background-color: white;
+  padding: 0.5em;
+
+
+}

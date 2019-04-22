@@ -1,0 +1,12 @@
+
+
+
+
+<i-cell-group>
+   <view wx:for="{{teacherinfo.courses}}">
+    <i-cell title="{{item.name}}" is-link url="/pages/teacher/course/detail?course_index={{index}}"></i-cell>
+   </view>
+   
+</i-cell-group>
+  
+
