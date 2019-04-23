@@ -12,7 +12,13 @@ Page({
     college_list:[],
     password:'',
     college_id:1,
+
     
+  },
+  bindpassInput(e) {
+    this.setData({
+      inputValue: e.detail.value
+    })
   },
   onroleChange(event) {
     var that=this;
@@ -72,6 +78,14 @@ Page({
     })
   },
   onLoad: function () {
+    var userinfo = wx.getStorageSync('userinfo');
+    if (userinfo) {
+      wx.navigateTo({
+        url: '/pages/student/index',
+      })
+      return 0;
+    }
+
     var that=this;
     wx.request({
       url: 'http://exam.alivefun.cn/college/show/', // 仅为示例，并非真实的接口地址

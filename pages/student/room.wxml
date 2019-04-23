@@ -1,0 +1,16 @@
+<live-player
+  src="rtmp://222.194.77.227:1935/stream/{{roomid}}"
+  mode="live"
+  autoplay
+  bindstatechange="statechange"
+  binderror="error"
+  style="width: 300px; height: 225px;"
+/>
+<text>{{num}}</text>
+
+<i-cell-group>
+    <view wx:for="{{messageList}}">
+    <i-cell title="{{item.username}}" is-link></i-cell>
+    </view>
+</i-cell-group>
+<button type="primary"   bindtap="sendMsg">发送</button>

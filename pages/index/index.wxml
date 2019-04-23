@@ -1,8 +1,10 @@
 <!--index.wxml-->
 <view class="container">
     <i-input value="{{ no }}" type="number" title="账号"  />
-    <i-input value="{{ password }}" type="text" title="密码" placeholder="请输入手机号" />
+    <i-input value="{{ password }}" bindinput="bindpassInput" type="text" title="密码" placeholder="输入密码" />
      <i-switch value="{{role}}" bind:change="onroleChange" slot="footer"></i-switch>
+      <i-button bind:click="handleloginClick" type="ghost" shape="circle" size="large">登录</i-button>
+      
      <picker-view
     indicator-style="height: 50px;"
     style="width: 100%; height: 300px;"
@@ -13,5 +15,5 @@
       <view wx:for="{{college_list}}" style="line-height: 50px">{{item.name}}</view>
     </picker-view-column>
     </picker-view>
-     <i-button bind:click="handleloginClick" type="ghost" shape="circle" size="large">登录</i-button>
+    
 </view>

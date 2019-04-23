@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/teacher/index",
     "pages/logs/logs",
-    "pages/student/index"
+    "pages/student/index",
+    "pages/student/room"
   ],
   "window": {
     "backgroundTextStyle": "light",

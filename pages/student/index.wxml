@@ -1,2 +1,11 @@
-<!--pages/student/index.wxml-->
-<text>pages/student/index.wxml</text>
+<view wx:for="{{livecourses}}">
+<navigator
+    url="/pages/student/room?courseid={{item.id}}"
+    hover-class="navigator-hover"
+  >
+<i-card title="{{item.name}}" extra="ID:{{item.id}}" thumb="https://i.loli.net/2017/08/21/599a521472424.jpg">
+    <view slot="content">教师:{{item.teacher.name}}</view>
+    <view slot="footer">开课时间：{{item.liveroom.live_time}}</view>
+</i-card>
+ </navigator>
+</view>
