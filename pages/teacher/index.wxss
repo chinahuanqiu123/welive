@@ -1,1 +1,5 @@
 /* pages/teacher/index.wxss */
+.icon_num{
+
+  color:green;
+}

@@ -8,6 +8,11 @@ Page({
      teacherinfo:'',
      firstname:'',
      papercourses:'',
+     coursenum:0,
+     papercoursenum:0,
+     livecoursenum:0,
+    livecourses:[],
+     
      
   },
 
@@ -27,6 +32,7 @@ Page({
             firstname: 'x'
           })
           that.getpaper_courses()
+          that.getlive_courses()
         });
 
       },
@@ -98,6 +104,22 @@ Page({
       success(res) {
         that.setData({
           papercourses: res.data.has_paper_courses
+        })
+      }
+    })
+
+  },
+  getlive_courses:function(){
+    var that = this;
+    wx.request({
+      url: 'http://exam.alivefun.cn//teacher/'+that.data.teacherinfo.id+'/mylivecourses' ,
+      method: 'GET',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        that.setData({
+          livecourses: res.data.has_live_courses
         })
       }
     })
