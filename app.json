@@ -4,7 +4,8 @@
     "pages/logs/logs",
     "pages/student/index",
     "pages/student/room",
-    "pages/teacher/index"
+    "pages/teacher/index",
+    "pages/teacher/create"
   ],
   "window": {
     "backgroundTextStyle": "light",

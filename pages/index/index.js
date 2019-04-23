@@ -52,7 +52,7 @@ Page({
       success(res) {
         
         wx.setStorageSync('userinfo',res.data.student_info)
-        wx.setStorageSync('role', res.data.role)
+        wx.setStorageSync('role', that.data.role?'student':'teacher')
               if (that.data.role) {
 
                 wx.navigateTo({
@@ -80,13 +80,13 @@ Page({
   onLoad: function () {
     var userinfo = wx.getStorageSync('userinfo');
     var role = wx.getStorageSync('role');
-    if (userinfo&&role) {
+    if (userinfo&&role=='student') {
       wx.navigateTo({
         url: '/pages/student/index',
       })
       return 0;
     }
-    else if (userinfo && !role) {
+    else if (userinfo &&role=='teacher') {
       wx.navigateTo({
         url: '/pages/teacher/index',
       })

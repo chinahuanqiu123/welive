@@ -1,26 +1,21 @@
-// pages/teacher/index.js
+// pages/teacher/create.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-     teacherinfo:'',
-     firstname:'',
-     papercourses:'',
-     coursenum:0,
-     papercoursenum:0,
-     livecoursenum:0,
-    livecourses:[],
-     
-     
+    teacherinfo:'',
+    course_value:'',
+    date:'',
+    time:''
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
     var that = this;
     wx.getStorage({
       key: 'userinfo',
@@ -28,22 +23,13 @@ Page({
         that.setData({
           teacherinfo: res.data
         }, function () {
-          that.setData({
-            firstname: 'x'
-          })
-          that.getpaper_courses()
-          that.getlive_courses()
+         
+          
         });
 
       },
     })
-
-    
-
-
-
   },
-
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -93,39 +79,43 @@ Page({
   onShareAppMessage: function () {
 
   },
-  getpaper_courses:function(){
-     var that=this;
+  bindCourseChange:function(e){
+    var that=this;
+    var val = e.detail.value;
+    that.setData({
+      course_value:val
+    })
+
+
+  },
+  bindDateChange(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      date: e.detail.value
+    })
+  },
+  bindTimeChange(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      time: e.detail.value
+    })
+  },
+  sendLiveinfo:function(){
+    var that = this;
     wx.request({
-      url: 'http://exam.alivefun.cn/teacher/' + that.data.teacherinfo.id + '/mypapercourses',
-      method:'GET',
+      url: 'http://exam.alivefun.cn/live/save',
+      method: 'POST',
+      data:{  
+        course_id:that.data.teacherinfo.courses[that.data.course_value]['id'],
+        live_time:that.data.date+' '+that.data.time,
+        live_state:0
+       },
       header: {
         'content-type': 'application/json' // 默认值
       },
       success(res) {
         that.setData({
           papercourses: res.data.has_paper_courses
-        })
-      }
-    })
-
-  },
-  getlive_courses:function(){
-    var that = this;
-    wx.request({
-      url: 'http://exam.alivefun.cn//teacher/'+that.data.teacherinfo.id+'/mylivecourses' ,
-      method: 'GET',
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success(res) {
-        that.setData({
-          livecourses: res.data.has_live_courses
-        },function(){
-           wx.setStorage({
-             key: 'livecourses',
-             data:res.data.has_live_courses,
-           })
-
         })
       }
     })
