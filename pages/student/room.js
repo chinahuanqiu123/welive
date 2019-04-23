@@ -11,8 +11,14 @@ Page({
     roomid:0,
     studentinfo:'',
     num:0,
-    messageList:[]
-
+    messageList:[],
+    tab: '3',
+    tab1: true,
+    msg:'',
+    members:[],
+    scrollTop:0,
+    targetTime: 0,
+    myFormat:['天','时','分','秒'],
   },
 
   /**
@@ -22,13 +28,14 @@ Page({
     var that=this;
     
     this.setData({
-      roomid:options.courseid
+      roomid:options.courseid,
+      targetTime: new Date(options.livetime).getTime()
     },function(){
        wx.getStorage({
          key: 'userinfo',
          success: function(res) {
            that.setData({
-           studentinfo:res.data
+           studentinfo:res.data,
            },function(){
              that.webSocket()
            })
@@ -40,7 +47,33 @@ Page({
    
   },
 
- 
+  handletabChange({ detail }) {
+    var index = detail.key
+    console.log(index)
+    this.setData({
+      tab: detail.key
+    });
+    if (index == 1) {
+      this.setData({
+        tab1: true,
+        tab2: false,
+        tab3:false
+      })
+    } else if (index == 2) {
+      this.setData({
+        tab1: false,
+        tab2: true,
+        tab3: false
+      })
+    }
+    else if (index == 3) {
+      this.setData({
+        tab1: false,
+        tab2: false,
+        tab3: true
+      })
+    }
+  },
   onUnload: function () {
     var that=this;
     var socketMsgQueue = JSON.stringify({
@@ -59,7 +92,14 @@ Page({
      
    
   },
+   msgInput:function(e){
 
+    this.setData({
+       msg:e.detail.value
+
+    })
+
+},
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
@@ -104,8 +144,9 @@ Page({
       roomid: that.data.roomid,
       username: that.data.studentinfo.name,
       type: 1,
-      message:'test',
-      role:'student'
+      message:that.data.msg,
+      role:'student',
+      time: new Date().toLocaleTimeString()
 
     })
     wx.sendSocketMessage({
@@ -165,21 +206,44 @@ Page({
         that.setData({
           num: onMessage_data.num
         })
+       
+         that.getNumber();
       }
       if(onMessage_data.type==1){
          
         obj.push(onMessage_data);
         that.setData({
           messageList:obj
-        })
+        },function(){
+          this.setData({
+            scrollTop: that.data.scrollTop + 50
+          })
 
+        })
       }
     })
 
 
   },
+  getNumber:function(){
+    var that=this;
+    wx.request({
+      url: 'http://exam.alivefun.cn/live/'+that.data.roomid+'/members', // 仅为示例，并非真实的接口地址
+      method: 'GET',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+
+        that.setData({
+          members: res.data.members
+        })
+
+
+      }
+    })
+
+
+  }
  
-
-
-  
 })

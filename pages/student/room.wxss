@@ -1,1 +1,14 @@
 /* pages/student/room.wxss */
+.controls {
+position: relative;
+top:40%;
+height:50px;
+margin-top:-25px;
+display:flex;
+width:15%;
+justify-content:center;
+align-content:center;
+text-align:center;
+margin:auto;
+
+}
