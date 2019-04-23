@@ -52,7 +52,7 @@ Page({
       success(res) {
         
         wx.setStorageSync('userinfo',res.data.student_info)
-            
+        wx.setStorageSync('role', res.data.role)
               if (that.data.role) {
 
                 wx.navigateTo({
@@ -79,13 +79,19 @@ Page({
   },
   onLoad: function () {
     var userinfo = wx.getStorageSync('userinfo');
-    if (userinfo) {
+    var role = wx.getStorageSync('role');
+    if (userinfo&&role) {
       wx.navigateTo({
         url: '/pages/student/index',
       })
       return 0;
     }
-
+    else if (userinfo && !role) {
+      wx.navigateTo({
+        url: '/pages/teacher/index',
+      })
+      return 0;
+    }
     var that=this;
     wx.request({
       url: 'http://exam.alivefun.cn/college/show/', // 仅为示例，并非真实的接口地址

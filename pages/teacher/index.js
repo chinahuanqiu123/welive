@@ -5,7 +5,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+     teacherinfo:'',
+     firstname:'',
+     papercourses:'',
+     
   },
 
   /**
@@ -13,7 +16,28 @@ Page({
    */
   onLoad: function (options) {
 
+    var that = this;
+    wx.getStorage({
+      key: 'userinfo',
+      success: function (res) {
+        that.setData({
+          teacherinfo: res.data
+        }, function () {
+          that.setData({
+            firstname: 'x'
+          })
+          that.getpaper_courses()
+        });
+
+      },
+    })
+
+    
+
+
+
   },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -61,6 +85,22 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+
+  },
+  getpaper_courses:function(){
+     var that=this;
+    wx.request({
+      url: 'http://exam.alivefun.cn/teacher/' + that.data.teacherinfo.id + '/mypapercourses',
+      method:'GET',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        that.setData({
+          papercourses: res.data.has_paper_courses
+        })
+      }
+    })
 
   }
 })

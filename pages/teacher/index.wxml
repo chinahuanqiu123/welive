@@ -1,2 +1,26 @@
-<!--pages/teacher/index.wxml-->
-<text>pages/teacher/index.wxml</text>
+<i-panel title="{{teacherinfo.major.department.name}}{{teacherinfo.major.name}}专业">
+    <view style="padding: 15px;"><i-avatar >{{firstname}}</i-avatar>{{teacherinfo.name}}的教学主页</view>
+</i-panel>
+<i-notice-bar icon="systemprompt" loop>
+    尊敬的老师，您本学期有{{teacherinfo.courses.length}}门课
+</i-notice-bar>
+<i-grid>
+    <i-grid-item>
+        <i-grid-icon>
+            <i-icon type="createtask" size="28" color="green" />
+        </i-grid-icon>
+        <i-grid-label>课程</i-grid-label>
+    </i-grid-item>
+    <i-grid-item>
+       <i-grid-icon>
+            <i-icon type="document" size="28" color="green" />
+        </i-grid-icon>
+        <i-grid-label>直播</i-grid-label>
+    </i-grid-item>
+     <i-grid-item>
+       <i-grid-icon>
+           <i-icon type="playon" size="28" color="green" />
+        </i-grid-icon>
+        <i-grid-label>考试</i-grid-label>
+    </i-grid-item>
+</i-grid>
