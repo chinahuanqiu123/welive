@@ -1,7 +1,7 @@
 <live-pusher
-  src="rtmp://222.194.77.227:1935/stream/{{roomid}}"
-  mode="live"
-  autoplay
+  url="rtmp://222.194.77.227:1935/stream/{{roomid}}"
+  mode="HD"
+  autopush
   bindstatechange="statechange"
   binderror="error"
   style="width:750rpx; height: 435rpx;"

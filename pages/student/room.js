@@ -19,6 +19,11 @@ Page({
     scrollTop:0,
     targetTime: 0,
     myFormat:['天','时','分','秒'],
+    questioninfo:'',
+    currentchoice:'null',
+    checked:true,
+    question_visable:false,
+
   },
 
   /**
@@ -209,7 +214,7 @@ Page({
        
          that.getNumber();
       }
-      if(onMessage_data.type==1){
+      else if(onMessage_data.type==1){
          
         obj.push(onMessage_data);
         that.setData({
@@ -221,9 +226,20 @@ Page({
 
         })
       }
+      else if(onMessage_data.type==4){
+        this.setData({
+          questioninfo:onMessage_data.questioninfo
+        })
+
+      }
     })
 
 
+  },
+  handleFruitChange({ detail = {} }) {
+    this.setData({
+      currentchoice: detail.value
+    });
   },
   getNumber:function(){
     var that=this;

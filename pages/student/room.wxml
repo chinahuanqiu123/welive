@@ -1,3 +1,11 @@
+<i-panel wx:if="{{question_visable}}" title="{{questioninfo.name}}">
+    <i-radio-group current="{{currentchoice}}" bindchange="handleFruitChange">
+        <i-radio checked="{{checked}}" wx:key="1"  position="{{position}}"  value="{{questioninfo.choice_a}}"> </i-radio>
+        <i-radio wx:key="2" position="{{position}}"  value="{{questioninfo.choice_b}}"> </i-radio>
+        <i-radio wx:key="3" position="{{position}}"  value="{{questioninfo.choice_c}}"> </i-radio>
+        <i-radio wx:key="4" position="{{position}}"  value="{{questioninfo.choice_d}}"> </i-radio>
+    </i-radio-group>
+</i-panel>
 <live-player
   src="rtmp://222.194.77.227:1935/stream/{{roomid}}"
   mode="live"
