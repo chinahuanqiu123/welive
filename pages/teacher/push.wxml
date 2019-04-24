@@ -1,0 +1,88 @@
+<live-pusher
+  src="rtmp://222.194.77.227:1935/stream/{{roomid}}"
+  mode="live"
+  autoplay
+  bindstatechange="statechange"
+  binderror="error"
+  style="width:750rpx; height: 435rpx;"
+>
+<cover-view class="controls">
+<cover-image src='../../asserts/unstart.png'></cover-image>
+</cover-view>
+<cover-view style="color:green;text-align:center">直播暂未开始</cover-view>
+</live-pusher>
+
+<view>
+
+
+<i-notice-bar>
+ <i-tag 
+    class="i-tags"
+    name="标签一" 
+    color="green"
+    type="border">
+    在线人数:{{num}}
+</i-tag>
+</i-notice-bar>
+
+
+</view>
+
+<i-tabs current="{{ tab }}" color="green" bindchange="handletabChange">
+  <i-tab key="1" title="互动"></i-tab>
+  <i-tab key="2" title="在线成员"></i-tab>
+  <i-tab key="3" title="直播信息"></i-tab>
+</i-tabs>
+<view wx:if="{{tab1}}" class='tab1'>
+  <i-cell-group>
+  <scroll-view
+    scroll-y
+    style="height: 200px;"
+    bindscrolltoupper="upper"
+    bindscrolltolower="lower"
+    bindscroll="scroll"
+    scroll-into-view="{{toView}}"
+    scroll-top="{{scrollTop}}"
+  >
+    <view wx:for="{{messageList}}">
+    <i-cell title="{{item.username}}-{{item.time}}:{{item.message}}" is-link></i-cell>
+    </view>
+</scroll-view>  
+</i-cell-group>
+ <i-input value="{{ msg }}" type="text" mode="wrapped" bind:change="msginput" placeholder="我想说..." />
+<button type="primary"   bindtap="sendMsg">发送</button>
+</view>
+<view wx:if="{{tab2}}" class='tab2'>
+   <i-cell-group>
+  <scroll-view
+    scroll-y
+    style="height: 200px;"
+    bindscrolltoupper="upper"
+    bindscrolltolower="lower"
+    bindscroll="scroll2"
+    scroll-into-view="{{toView2}}"
+    scroll-top="{{scrollTop2}}"
+  >
+    <view wx:for="{{members}}">
+    <i-cell title="{{item.name}}-{{item.no}}-{{item.section_id}}" is-link></i-cell>
+    </view>
+</scroll-view>  
+</i-cell-group>
+  
+</view>
+<view wx:if="{{tab3}}" class='tab3'>
+
+   
+    <i-card title="卡片标题" extra="额外内容" thumb="https://i.loli.net/2017/08/21/599a521472424.jpg">
+    <view slot="content"></view>
+    <view slot="footer">
+    距离课程开播还有：
+    <i-count-down
+            target="{{targetTime}}"
+            show-day="true"
+            format="{{myFormat}}"
+            clear-timer="{{clearTimer}}"
+    ></i-count-down>
+    </view>
+    </i-card>
+</view>

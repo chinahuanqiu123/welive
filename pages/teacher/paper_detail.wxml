@@ -1,0 +1,30 @@
+<i-tabs current="{{ tab }}" color="#f759ab"  bindchange="handletabChange">
+    <i-tab key="1" title="考试班级"  count="{{courseinfo.sections.length}}"></i-tab>
+    <i-tab key="2" title="考试列表"></i-tab>
+    <i-tab key="3" title="统计"></i-tab>
+</i-tabs>
+
+<view wx:if="{{tab1}}" class='tab1'>
+<i-cell-group>
+ <view wx:for="{{courseinfo.sections}}" wx:for-item="item">
+    <i-cell title="{{item.grade}}级-{{item.name}}" >
+        <i-cell-group>
+        <view wx:for="{{item.students}}" wx:for-item="stu" >
+        <i-cell title="{{stu.name}}" is-link></i-cell>
+        </view>
+        </i-cell-group>
+    </i-cell>
+</view>
+</i-cell-group>
+</view>
+
+<view wx:if="{{tab2}}" class='tab2'>
+<i-cell-group>
+ <view wx:for="{{courseinfo.papers}}" wx:for-item="item">
+    <i-cell title="试卷名称:{{item.name}}" ></i-cell>
+</view>
+</i-cell-group>
+</view>
+<view wx:if="{{tab3}}" class='tab3'>
+3
+</view>

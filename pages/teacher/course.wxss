@@ -1,0 +1,8 @@
+/* pages/teacher/course.wxss */
+.coll_title{
+
+ background: #e4ece8;
+ color:#16b408b0;
+ font-size: 20px;
+
+}

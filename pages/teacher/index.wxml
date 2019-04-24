@@ -26,10 +26,15 @@
 </i-grid>
 <i-grid>
     <i-grid-item>
+   <navigator
+    url="/pages/teacher/course"
+    hover-class="navigator-hover"
+  >
         <i-grid-icon>
             <i-icon type="createtask" size="28" color="green" />
         </i-grid-icon>
         <i-grid-label>课程</i-grid-label>
+   </navigator>
     </i-grid-item>
     <i-grid-item>
        <i-grid-icon>
@@ -38,10 +43,15 @@
         <i-grid-label>直播</i-grid-label>
     </i-grid-item>
      <i-grid-item>
+     <navigator
+    url="/pages/teacher/paper"
+    hover-class="navigator-hover"
+     >
        <i-grid-icon>
            <i-icon type="playon" size="28" color="green" />
         </i-grid-icon>
         <i-grid-label>考试</i-grid-label>
+      </navigator>
     </i-grid-item>
 </i-grid>
 <i-grid>

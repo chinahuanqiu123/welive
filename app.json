@@ -5,7 +5,11 @@
     "pages/student/index",
     "pages/student/room",
     "pages/teacher/index",
-    "pages/teacher/create"
+    "pages/teacher/create",
+    "pages/teacher/course",
+    "pages/teacher/paper",
+    "pages/teacher/paper_detail",
+    "pages/teacher/push"
   ],
   "window": {
     "backgroundTextStyle": "light",

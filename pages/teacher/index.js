@@ -7,7 +7,7 @@ Page({
   data: {
      teacherinfo:'',
      firstname:'',
-     papercourses:'',
+     papercourses:[],
      coursenum:0,
      papercoursenum:0,
      livecoursenum:0,
@@ -104,6 +104,13 @@ Page({
       success(res) {
         that.setData({
           papercourses: res.data.has_paper_courses
+        },function(){
+
+          wx.setStorage({
+            key: 'papercourses',
+            data: res.data.has_paper_courses,
+          })
+
         })
       }
     })

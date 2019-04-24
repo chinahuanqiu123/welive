@@ -1,0 +1,19 @@
+<!--pages/teacher/course/paper.wxml-->
+<view class="container">
+<i-spin fix wx:if="{{ spinShow }}" size="large">加载中...</i-spin>
+<i-row>
+    <i-col span="24" i-class="col-class">
+    <i-divider content="考试课程列表" color="green" lineColor="#2d8cf0"></i-divider>
+<i-cell-group>
+   <view wx:for="{{paper_courseinfo}}">
+    <i-cell title="{{item.name}}" is-link url="/pages/teacher/paper_detail?course_index={{index}}"></i-cell>
+   </view>
+   
+</i-cell-group>
+    
+    
+    </i-col>
+   
+</i-row>
+
+</view>

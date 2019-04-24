@@ -1,0 +1,18 @@
+
+   
+
+
+  <i-collapse name="{{name}}">
+  <view wx:for="{{teacherinfo.courses}}" wx:for-item="item">
+        <i-collapse-item title="{{item.name}}" name="{{item.id}}" i-class="coll_title">
+            <view slot="content">
+                <view wx:for="{{item.sections}}" wx:for-item="sec">
+                <i-cell-group>
+                 <i-cell title="{{sec.grade}}级- {{sec.name}}" is-link></i-cell>
+                  
+                </i-cell-group>
+                </view>
+            </view>
+        </i-collapse-item>
+    </view>
+  </i-collapse>
