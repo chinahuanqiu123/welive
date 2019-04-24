@@ -10,14 +10,14 @@
   src="rtmp://222.194.77.227:1935/stream/{{roomid}}"
   mode="live"
   autoplay
-  bindstatechange="statechange"
+  bindstatechange="livestatechange"
   binderror="error"
   style="width:750rpx; height: 435rpx;"
 >
-<cover-view class="controls">
+<cover-view class="controls" wx:if="{{!on_live}}">
 <cover-image src='../../asserts/unstart.png'></cover-image>
 </cover-view>
-<cover-view style="color:green;text-align:center">直播暂未开始</cover-view>
+<cover-view  wx:if="{{!on_live}}" style="color:green;text-align:center">直播暂未开始</cover-view>
 </live-player>
 
 <view>

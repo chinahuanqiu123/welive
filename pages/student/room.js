@@ -13,7 +13,9 @@ Page({
     num:0,
     messageList:[],
     tab: '3',
-    tab1: true,
+    tab1: false,
+    tab2:false,
+    tab3:true,
     msg:'',
     members:[],
     scrollTop:0,
@@ -23,6 +25,7 @@ Page({
     currentchoice:'null',
     checked:true,
     question_visable:false,
+    on_live:false,
 
   },
 
@@ -42,7 +45,7 @@ Page({
            that.setData({
            studentinfo:res.data,
            },function(){
-             that.webSocket()
+             this.webSocket()
            })
          },
        })
@@ -127,14 +130,27 @@ Page({
   },
 
   onShow: function () {
-    
-    
 
-    
-
+   
+     
 
   },
   onHide: function () {
+
+    var that = this;
+    var socketMsgQueue = JSON.stringify({
+      roomid: that.data.roomid,
+      type: 3
+    })
+    wx.sendSocketMessage({
+      data: socketMsgQueue,
+      success: function () {
+        SocketTask.close(function (close) {
+          console.log('关闭 WebSocket 连接。', close)
+        })
+
+      }
+    })
     SocketTask.close(function (close) {
       console.log('关闭 WebSocket 连接。', close)
     })
@@ -142,6 +158,15 @@ Page({
   // 页面加载完成
   onReady: function () {
    
+  },
+  livestatechange:function(e){
+    var that=this;
+      if(e.detail.code==2003){
+        this.setData({
+           on_live:true
+        })
+
+      }
   },
   sendMsg:function(){
          var that=this;
@@ -161,6 +186,7 @@ Page({
   },
   webSocket: function () {
     // 创建Socket
+    
     SocketTask = wx.connectSocket({
       url: url,
       data: 'data',
@@ -170,6 +196,7 @@ Page({
       method: 'post',
       success: function (res) {
         console.log('WebSocket连接创建', res)
+        
       },
       fail: function (err) {
         wx.showToast({
@@ -230,6 +257,32 @@ Page({
         this.setData({
           questioninfo:onMessage_data.questioninfo,
           question_visable:true
+        })
+
+      }
+      else if (onMessage_data.type == 5) {
+        this.setData({
+          question_visable:false
+        })
+        wx.request({
+          url: 'http://exam.alivefun.cn/live/question/record/save',
+          method:'POST',
+          data: {
+            student_id: that.data.studentinfo.id,
+            answer: that.data.currentchoice,
+            question_choice_id: that.data.questioninfo.id
+          },
+          header: {
+            'content-type': 'application/json' // 默认值
+          },
+          success(res) {
+            wx.showToast({
+              title: '交卷成功',
+              icon: 'success',
+              duration: 2000
+            })
+          }
+
         })
 
       }

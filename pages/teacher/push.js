@@ -273,6 +273,21 @@ Page({
      })
 
   },
+  handlebackquestion:function(){
+    var that = this;
+    var socketMsgQueue = JSON.stringify({
+      roomid: that.data.roomid,
+      type: 5
+    })
+    wx.sendSocketMessage({
+      data: socketMsgQueue,
+      success: function () {
+        
+      }
+    })
+
+
+  },
   getChoicepaper:function(){
     var con=[];
     var that = this;
