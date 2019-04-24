@@ -26,6 +26,8 @@ Page({
     resourcequestion:[],
     livecourses:[],
     live_course_index:'',
+    latestudents:[],
+    allstudents:[],
   },
 
   /**
@@ -265,15 +267,23 @@ Page({
           members: res.data.members
         },function(){
           let allstus=[];
+          let latestus= [];
           let  allstudent= that.data.livecourses[that.data.live_course_index].sections;
           allstudent.forEach(function (section, index) {
             section.students.forEach(function (student, index) {
               allstus.push(student);
             })    
-          })  
+          })
+          for (let i = 0; i < allstus.length; i++) {
+            for (let j = 0; j <res.data.members.length; j++) {
+              if (res.data.members[j].id != allstus[i].id) {
+                latestus.push(allstus[i])
+              }
+            }
+          }  
           that.setData({
-            allstudents:allstus
-           
+            allstudents:allstus,
+            latestudents:latestus
           })
         })
       }
