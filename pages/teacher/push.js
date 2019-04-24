@@ -23,7 +23,9 @@ Page({
     myFormat: ['天', '时', '分', '秒'],
     send_visible:false,
     questions:[],
-    resourcequestion:[]
+    resourcequestion:[],
+    livecourses:[],
+    live_course_index:'',
   },
 
   /**
@@ -34,6 +36,7 @@ Page({
 
     this.setData({
       roomid: options.courseid,
+      live_course_index: options.index,
       targetTime: new Date(options.livetime).getTime()
     }, function () {
       wx.getStorage({
@@ -43,6 +46,14 @@ Page({
             teacherinfo: res.data,
           }, function () {
             that.webSocket()
+          })
+        },
+      })
+      wx.getStorage({
+        key: 'livecourses',
+        success: function (res) {
+          that.setData({
+             livecourses: res.data
           })
         },
       })
@@ -160,7 +171,7 @@ Page({
       username: that.data.teacherinfo.name,
       type: 1,
       message: that.data.msg,
-      role: 'student',
+      role: 'teacher',
       time: new Date().toLocaleTimeString()
 
     })
@@ -195,7 +206,7 @@ Page({
       console.log('监听 WebSocket 连接打开事件。', res)
       var socketMsgQueue = JSON.stringify({
         roomid: that.data.roomid,
-        userid: that.data.teacherinfo.id,
+        userid: 111000+that.data.teacherinfo.no,
         type: 0
 
       })
@@ -252,9 +263,19 @@ Page({
 
         that.setData({
           members: res.data.members
+        },function(){
+          let allstus=[];
+          let  allstudent= that.data.livecourses[that.data.live_course_index].sections;
+          allstudent.forEach(function (section, index) {
+            section.students.forEach(function (student, index) {
+              allstus.push(student);
+            })    
+          })  
+          that.setData({
+            allstudents:allstus
+           
+          })
         })
-
-
       }
     })
 

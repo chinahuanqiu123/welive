@@ -31,6 +31,12 @@
     type="border">
     在线人数:{{num}}
 </i-tag>
+<i-tag 
+    class="i-tags" 
+    name="标签一" 
+    color="green">
+   所在班级:{{studentinfo.section.grade}}-{{studentinfo.section.name}}
+</i-tag>
 </i-notice-bar>
 
 

@@ -6,7 +6,7 @@
     <i-divider content="直播课程列表" color="green" lineColor="#2d8cf0"></i-divider>
 <i-cell-group>
    <view wx:for="{{live_courseinfo}}">
-    <i-cell title="{{item.name}}" is-link url="/pages/teacher/push?courseid={{item.id}}"></i-cell>
+    <i-cell title="{{item.name}}" is-link url="/pages/teacher/push?courseid={{item.id}}&index={{index}}"></i-cell>
    </view>
    
 </i-cell-group>

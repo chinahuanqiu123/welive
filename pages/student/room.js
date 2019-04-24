@@ -151,9 +151,7 @@ Page({
 
       }
     })
-    SocketTask.close(function (close) {
-      console.log('关闭 WebSocket 连接。', close)
-    })
+    
   },
   // 页面加载完成
   onReady: function () {

@@ -23,6 +23,14 @@
     type="border">
     在线人数:{{num}}
 </i-tag>
+ 
+<i-tag   wx:for="{{livecourses[live_course_index].sections}}"
+    class="i-tags" 
+    name="标签一" 
+    color="green">
+    {{item.name}}
+</i-tag>
+ 
 </i-notice-bar>
 
 
@@ -63,6 +71,7 @@
     scroll-into-view="{{toView2}}"
     scroll-top="{{scrollTop2}}"
   >
+    
     <view wx:for="{{members}}">
     <i-cell title="{{item.name}}-{{item.no}}-{{item.section_id}}" is-link></i-cell>
     </view>
@@ -73,8 +82,8 @@
 <view wx:if="{{tab3}}" class='tab3'>
 
    
-    <i-card title="卡片标题" extra="额外内容" thumb="https://i.loli.net/2017/08/21/599a521472424.jpg">
-    <view slot="content"></view>
+    <i-card title="LIVEID:{{livecourses[live_course_index].liveroom.id}}" extra="额外内容" thumb="https://i.loli.net/2017/08/21/599a521472424.jpg">
+    <view slot="content">授课课程:{{livecourses[live_course_index].name}}</view>
     <view slot="footer">
     距离课程开播还有：
     <i-count-down
