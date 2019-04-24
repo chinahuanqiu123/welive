@@ -71,7 +71,13 @@
     scroll-into-view="{{toView2}}"
     scroll-top="{{scrollTop2}}"
   >
-    
+     <i-collapse name="{{coll_name}}">
+        <i-collapse-item title="未在线学生{{latestudents.length}}/{{allstudents.length}}" name="stucoll">
+            <view wx:for="{{latestudents}}" slot="content">
+            <i-cell title="{{item.name}}-{{item.no}}-{{item.section_id}}" is-link></i-cell>
+            </view>
+        </i-collapse-item>
+      </i-collapse>
     <view wx:for="{{members}}">
     <i-cell title="{{item.name}}-{{item.no}}-{{item.section_id}}" is-link></i-cell>
     </view>
