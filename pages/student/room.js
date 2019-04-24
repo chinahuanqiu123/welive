@@ -228,7 +228,8 @@ Page({
       }
       else if(onMessage_data.type==4){
         this.setData({
-          questioninfo:onMessage_data.questioninfo
+          questioninfo:onMessage_data.questioninfo,
+          question_visable:true
         })
 
       }
