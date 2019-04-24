@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="container">
-    <i-input value="{{ no }}" type="number" title="账号"  />
-    <i-input value="{{ password }}" bindinput="bindpassInput" type="text" title="密码" placeholder="输入密码" />
+    <input value="{{ no }}" maxlength="15" bindinput="bindnoInput" type="number" title="账号"  />
+    <input value="{{ password }}" maxlength="15" bindinput="bindpassInput" type="text" title="密码" placeholder="输入密码" />
      <i-switch value="{{role}}" bind:change="onroleChange" slot="footer"></i-switch>
       <i-button bind:click="handleloginClick" type="ghost" shape="circle" size="large">登录</i-button>
       

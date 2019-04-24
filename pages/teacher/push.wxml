@@ -85,4 +85,17 @@
     ></i-count-down>
     </view>
     </i-card>
+    <i-button bind:click="handlequeston" type="success">在线测验</i-button>    
+<i-modal title="标题" actions="{{ questions }}" action-mode="{{ vertical }}" visible="{{ send_visible }}"  bind:click="handlechoicequestClick">
+      <view>一些文本</view>
+      <view>一些文本</view>
+      <view>一些文本</view>
+      <view>一些文本</view>
+      <view>一些文本</view>
+      <view>一些文本</view>
+      <view>一些文本</view>
+      <view>一些文本</view>
+      <view>一些文本</view>
+    </i-modal>
+
 </view>

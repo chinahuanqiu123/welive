@@ -8,7 +8,7 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     role: true,
-    no:'',
+    no:0,
     college_list:[],
     password:'',
     college_id:1,
@@ -17,7 +17,12 @@ Page({
   },
   bindpassInput(e) {
     this.setData({
-      inputValue: e.detail.value
+      password: e.detail.value
+    })
+  },
+  bindnoInput(e) {
+    this.setData({
+      no: e.detail.value
     })
   },
   onroleChange(event) {

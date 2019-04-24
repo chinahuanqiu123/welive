@@ -13,12 +13,17 @@ Page({
     num: 0,
     messageList: [],
     tab: '3',
-    tab1: true,
+    tab1: false,
+    tab2: false,
+    tab3: true,
     msg: '',
     members: [],
     scrollTop: 0,
     targetTime: 0,
     myFormat: ['天', '时', '分', '秒'],
+    send_visible:false,
+    questions:[],
+    resourcequestion:[]
   },
 
   /**
@@ -46,7 +51,17 @@ Page({
     })
 
   },
+  handleOpen1() {
+    this.setData({
+      send_visible: true
+    });
+  },
 
+  handleClose1() {
+    this.setData({
+      send_visible: false
+    });
+  },
   handletabChange({ detail }) {
     var index = detail.key
     console.log(index)
@@ -239,6 +254,65 @@ Page({
           members: res.data.members
         })
 
+
+      }
+    })
+
+
+  },
+  handlequeston:function(){
+    
+     var that=this;
+     that.setData({
+     send_visible:true
+
+     },function(){
+
+        that.getChoicepaper();
+
+     })
+
+  },
+  getChoicepaper:function(){
+    var con=[];
+    var that = this;
+    wx.request({
+      url: 'http://exam.alivefun.cn/live/' + that.data.roomid + '/questions', // 仅为示例，并非真实的接口地址
+      method: 'GET',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        var result = res.data.live_questions;
+        var ondate=[];
+        for (var i=0;i<result.length;i++){
+          ondate.push({
+                name:result[i]['name'],
+                 color:'#19be6b'
+          });
+        }
+   
+        that.setData({
+          questions:ondate,
+          resourcequestion:result
+        })
+      }
+    })
+  },
+  handlechoicequestClick({ detail }){
+    const index = detail.index;
+    var that = this;
+    var socketMsgQueue = JSON.stringify({
+      roomid: that.data.roomid,
+      type: 4,
+      questioninfo: that.data.resourcequestion[index]
+    })
+    wx.sendSocketMessage({
+      data:socketMsgQueue,
+      success:function(){
+        that.setData({
+          send_visible: false
+        });
 
       }
     })
