@@ -69,6 +69,10 @@ Page({
 
     })
 
+    wx.setKeepScreenOn({
+      keepScreenOn: true
+    })
+
   },
   handleOpen1() {
     this.setData({

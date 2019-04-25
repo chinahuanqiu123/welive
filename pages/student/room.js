@@ -26,6 +26,8 @@ Page({
     checked:true,
     question_visable:false,
     on_live:false,
+    recodePath:'',
+    isRecode:false,
 
   },
 
@@ -51,6 +53,10 @@ Page({
        })
 
 
+    })
+
+    wx.setKeepScreenOn({
+      keepScreenOn: true
     })
    
   },
@@ -284,6 +290,22 @@ Page({
         })
 
       }
+      else if(onMessage_data.type==6){
+        wx.getFileSystemManager().writeFile({
+          filePath: wx.env.USER_DATA_PATH +'/record1.wav',
+          data:onMessage_data.audio,
+          encoding:'binary',
+          fail:function(res){
+              console.log(res);
+          },
+          complete:function(res){
+             console.log(res);
+          }
+
+        })
+
+
+      }
     })
 
 
@@ -311,7 +333,56 @@ Page({
       }
     })
 
+  },
+  startRecode: function () {
+   
+    var s = this;
+    console.log("record start");
+    wx.startRecord({
+      success: function (res) {
+        console.log(res);
+        var tempFilePath = res.tempFilePath;
+        s.setData({ recodePath: tempFilePath, isRecode: true });
+      },
+      fail: function (res) {
+        console.log("fail");
+        console.log(res);
+        //录音失败
+      }
+    });
+  },
+  endRecode: function () {//结束录音 
+    var s = this;
+    console.log("end");
+    wx.stopRecord();
+    s.setData({ isRecode: false });
+    setTimeout(function () {s.getrecordfile()},2000);
+  },
+  getrecordfile:function(){
+    var that=this;
+     wx.getFileSystemManager().readFile({
+      filePath:that.data.recodePath,
+      success:function(res){
+        let audiomsg = JSON.stringify({
+          type: 6,
+          audio: res.data,
+          roomid: that.data.roomid
+        });
+        wx.sendSocketMessage({
+           data:audiomsg,
+           success:function(){
+                 console.log('cussess');
+
+           }
+         })
+
+      }
+    
+    })
+   
+
 
   }
+
  
 })

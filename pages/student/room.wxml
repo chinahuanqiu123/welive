@@ -99,4 +99,6 @@
     ></i-count-down>
     </view>
     </i-card>
+<button type="primary" bindtouchstart="startRecode" bindtouchend="endRecode" class="cxbtn">按住录音</button>
+
 </view>

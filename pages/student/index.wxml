@@ -1,3 +1,15 @@
+<i-panel title="">
+    <view style="padding: 15px;">{{studentinfo.name}}直播课表
+    <i-tag  class="i-tags" name="标签一"  type="border"  color="green">{{studentinfo.section.grade}}级{{studentinfo.section.name}}</i-tag>
+    <i-tag 
+    class="i-tags"
+    name="单个标签" 
+    color="green">
+    {{studentinfo.section.major.name}}
+</i-tag>
+    </view>
+</i-panel>
+
 <view wx:for="{{livecourses}}">
 <navigator
     url="/pages/student/room?courseid={{item.id}}&livetime={{item.liveroom.live_time}}"
@@ -6,6 +18,29 @@
 <i-card title="{{item.name}}" extra="ID:{{item.id}}" thumb="https://i.loli.net/2017/08/21/599a521472424.jpg">
     <view slot="content">教师:{{item.teacher.name}}</view>
     <view slot="footer">开课时间：{{item.liveroom.live_time}}</view>
+</i-card>
+ </navigator>
+</view>
+
+<i-panel title="">
+    <view style="padding: 15px;">猜你喜欢
+    <i-tag  class="i-tags" name="标签一"  type="border"  color="green">{{studentinfo.section.grade}}级{{studentinfo.section.name}}</i-tag>
+    <i-tag 
+    class="i-tags"
+    name="单个标签" 
+    color="green">
+    {{studentinfo.section.major.name}}
+</i-tag>
+    </view>
+</i-panel>
+<view wx:for="{{rec_list}}">
+<navigator
+    url="/pages/student/room?courseid={{item.id}}&livetime={{item.liveroom.live_time}}"
+    hover-class="navigator-hover"
+  >
+<i-card title="{{item.name}}" extra="ID:{{item.id}}" thumb="https://i.loli.net/2017/08/21/599a521472424.jpg">
+    <view slot="content">教师:{{item.teacher.name}}</view>
+    <view slot="footer">|推荐指数{{rec_rate[index].rate}}</view>
 </i-card>
  </navigator>
 </view>
