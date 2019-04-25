@@ -39,7 +39,7 @@ Page({
     this.setData({
       roomid: options.courseid,
       live_course_index: options.index,
-      targetTime: new Date(options.livetime).getTime()
+     
     }, function () {
       wx.getStorage({
         key: 'userinfo',
@@ -56,6 +56,12 @@ Page({
         success: function (res) {
           that.setData({
              livecourses: res.data
+          },function(){
+           that.setData({
+             targetTime: new Date(that.data.livecourses[options.index].liveroom.live_time).getTime()
+
+           })
+
           })
         },
       })
@@ -365,5 +371,7 @@ Page({
 
 
   }
+
+
 
 })
