@@ -447,7 +447,13 @@ Page({
         }
       }
     })
+  },
+  play_record_msg:function(e){
+    let query = e.currentTarget.dataset['index'];
+    innerAudioContext.src =this.data.messageList[query].src;
+    innerAudioContext.play();
+
+
   }
 
- 
 })

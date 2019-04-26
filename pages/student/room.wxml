@@ -61,10 +61,11 @@
     <view wx:for="{{messageList}}">
     <view wx:if="{{item.type==1}}">
     <i-cell title="{{item.username}}-{{item.time}}:{{item.message}}" is-link></i-cell>
-     </view>
-     <view wx:if="{{item.type==6}}">
-    {{item.username}}发来语音消息
-     </view>
+    </view>
+    <view wx:if="{{item.type==6}}">
+   
+        <i-button data-index="{{index}}" bind:click="play_record_msg" type="success"  shape="circle" size="small">语音消息</i-button>
+    </view>
     </view>
 </scroll-view>  
 </i-cell-group>
