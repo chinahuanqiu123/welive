@@ -12,6 +12,7 @@ Page({
     college_list:[],
     password:'',
     college_id:1,
+    canIUse: wx.canIUse('button.open-type.getUserInfo')
 
     
   },

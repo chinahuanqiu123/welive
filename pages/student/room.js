@@ -1,6 +1,8 @@
 // pages/student/room.js
 var socketOpen=true;
-var frameBuffer_Data, session, SocketTask;
+var frameBuffer_Data, session, SocketTask,string_base64;
+var recorder = wx.getRecorderManager();
+const innerAudioContext = wx.createInnerAudioContext() 
 var url = 'ws://socket.alivefun.cn';
 Page({
 
@@ -28,6 +30,7 @@ Page({
     on_live:false,
     recodePath:'',
     isRecode:false,
+    voice_ing_start_date:0,
 
   },
 
@@ -161,7 +164,7 @@ Page({
   },
   // 页面加载完成
   onReady: function () {
-   
+    this.on_recorder();
   },
   livestatechange:function(e){
     var that=this;
@@ -291,18 +294,7 @@ Page({
 
       }
       else if(onMessage_data.type==6){
-        wx.getFileSystemManager().writeFile({
-          filePath: wx.env.USER_DATA_PATH +'/record1.wav',
-          data:onMessage_data.audio,
-          encoding:'binary',
-          fail:function(res){
-              console.log(res);
-          },
-          complete:function(res){
-             console.log(res);
-          }
-
-        })
+     
 
 
       }
@@ -335,54 +327,92 @@ Page({
 
   },
   startRecode: function () {
+
+    this.setData({
+      voice_ing_start_date: new Date().getTime(), //记录开始点击的时间
+    })
+    const options = {
+      duration: 10000, //指定录音的时长，单位 ms
+      sampleRate: 16000, //采样率
+      numberOfChannels: 1, //录音通道数
+      encodeBitRate: 24000, //编码码率
+      format: 'mp3', //音频格式，有效值 aac/mp3
+      frameSize: 12, //指定帧大小，单位 KB
+    }
+    recorder.start(options) //开始录音
+  
+
    
-    var s = this;
-    console.log("record start");
-    wx.startRecord({
-      success: function (res) {
-        console.log(res);
-        var tempFilePath = res.tempFilePath;
-        s.setData({ recodePath: tempFilePath, isRecode: true });
-      },
-      fail: function (res) {
-        console.log("fail");
-        console.log(res);
-        //录音失败
+    
+  },
+  on_recorder: function () {
+    var that = this;
+    recorder.onStart((res) => {
+      console.log('开始录音');
+    })
+    recorder.onStop((res) => {
+      console.log('停止录音,临时路径', res.tempFilePath);
+      // _tempFilePath = res.tempFilePath;
+      var x = new Date().getTime() - this.data.voice_ing_start_date
+   
+    })
+    recorder.onFrameRecorded((res) => {
+      var x = new Date().getTime() - this.data.voice_ing_start_date
+      if (x > 1000) {
+        console.log('onFrameRecorded  res.frameBuffer', res.frameBuffer);
+        string_base64 = wx.arrayBufferToBase64(res.frameBuffer)
+
+       //  console.log('string_base64--', wx.arrayBufferToBase64(string_base64))
+        if (res.isLastFrame) {
+          
+            var data2 = {
+              audioType: 3,
+              type: 6,
+              roomid:that.data.roomid,
+              signType: 'BASE64',
+              body: string_base64,
+            }
+          console.log('录音上传的data:', data2)
+            data2=JSON.stringify(data2)
+          wx.sendSocketMessage({
+            data: data2,
+            success: function (res) {
+              console.log(res);
+
+            }
+          })
+            
+          
+          // 进行下一步操作
+        } else {
+          
+            var data1 = {
+              audioType: 2,
+              type: 6,
+              roomid: that.data.roomid,
+              signType: 'BASE64',
+              body: string_base64
+            }
+            console.log('录音上传的data:', data1)
+          data1 = JSON.stringify(data1)
+          wx.sendSocketMessage({
+            data: data1,
+            success: function () {
+              console.log('cussess');
+
+            }
+          })
+        
+        }
       }
-    });
+    })
   },
   endRecode: function () {//结束录音 
     var s = this;
-    console.log("end");
-    wx.stopRecord();
-    s.setData({ isRecode: false });
-    setTimeout(function () {s.getrecordfile()},2000);
-  },
-  getrecordfile:function(){
-    var that=this;
-     wx.getFileSystemManager().readFile({
-      filePath:that.data.recodePath,
-      success:function(res){
-        let audiomsg = JSON.stringify({
-          type: 6,
-          audio: res.data,
-          roomid: that.data.roomid
-        });
-        wx.sendSocketMessage({
-           data:audiomsg,
-           success:function(){
-                 console.log('cussess');
-
-           }
-         })
-
-      }
-    
-    })
+    recorder.stop();
    
-
-
-  }
+  },
+  
 
  
 })

@@ -6,7 +6,9 @@ Page({
    */
   data: {
     studentinfo:'',
-    livecourses:[]
+    livecourses:[],
+    rec_list:[],
+    rec_rate:[],
 
   },
 
@@ -30,7 +32,7 @@ Page({
          studentinfo:res.data
        },function(){
          that.getLiveinfo();
-
+        that.getreclive();
        });
         
       },
@@ -98,6 +100,24 @@ Page({
          })
 
 
+      }
+    })
+
+
+  },
+  getreclive:function(){
+    var that = this;
+    wx.request({
+      url: 'http://exam.alivefun.cn/live/recommend', // 仅为示例，并非真实的接口地址
+      method: 'POST',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        that.setData({
+          rec_list: res.data.livecourses,
+          rec_rate: res.data.rec_rates
+        })
       }
     })
 
