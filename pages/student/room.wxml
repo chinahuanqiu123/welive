@@ -65,6 +65,7 @@
 </i-cell-group>
  <i-input value="{{ msg }}" type="text" mode="wrapped" bind:change="msginput" placeholder="我想说..." />
 <button type="primary"   bindtap="sendMsg">发送</button>
+<button type="primary" bindtouchstart="startRecode" bindtouchend="endRecode" class="cxbtn">按住录音</button>
 </view>
 <view wx:if="{{tab2}}" class='tab2'>
    <i-cell-group>
@@ -99,6 +100,6 @@
     ></i-count-down>
     </view>
     </i-card>
-<button type="primary" bindtouchstart="startRecode" bindtouchend="endRecode" class="cxbtn">按住录音</button>
+
 
 </view>
