@@ -59,7 +59,12 @@
     scroll-top="{{scrollTop}}"
   >
     <view wx:for="{{messageList}}">
+    <view wx:if="{{item.type==1}}">
     <i-cell title="{{item.username}}-{{item.time}}:{{item.message}}" is-link></i-cell>
+     </view>
+     <view wx:if="{{item.type==6}}">
+    {{item.username}}发来语音消息
+     </view>
     </view>
 </scroll-view>  
 </i-cell-group>

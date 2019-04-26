@@ -296,7 +296,7 @@ Page({
       }
       else if(onMessage_data.type==6){
      
-            that.download_record();
+            that.download_record(onMessage_data,obj);
 
 
       }
@@ -369,10 +369,12 @@ Page({
           
             var data2 = {
               audioType: 3,
+              username:that.data.studentinfo.name,
               type: 6,
               roomid:that.data.roomid,
               signType: 'BASE64',
               body: string_base64,
+              time: new Date().toLocaleTimeString()
             }
           console.log('录音上传的data:', data2)
             data2=JSON.stringify(data2)
@@ -414,7 +416,7 @@ Page({
     recorder.stop();
    
   },
-  download_record: function () {
+  download_record: function (messge,tempmes) {
     var _this = this;
     const downloadTask = wx.downloadFile({
       url: 'http://exam.alivefun.cn/download/record', //仅为示例，并非真实的资源
@@ -425,8 +427,22 @@ Page({
           _this.setData({
              now_record: res.tempFilePath //将下载的图片临时路径赋值给img_l,用于预览图片
           },function(){
-            innerAudioContext.src=res.tempFilePath;
-            innerAudioContext.play(); 
+            tempmes.push({
+               username:messge.username,
+               time:messge.time,
+              type: messge.type,
+              src: res.tempFilePath
+
+            })
+            _this.setData({
+              messageList:tempmes
+            }, function () {
+              this.setData({
+                scrollTop: _this.data.scrollTop + 50
+              })
+
+            })
+           
           })
         }
       }
