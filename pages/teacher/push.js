@@ -1,6 +1,7 @@
 // pages/student/room.js
 var socketOpen = true;
 var frameBuffer_Data, session, SocketTask;
+const innerAudioContext = wx.createInnerAudioContext() 
 var url = 'ws://socket.alivefun.cn';
 Page({
 
@@ -28,6 +29,7 @@ Page({
     live_course_index:'',
     latestudents:[],
     allstudents:[],
+    now_record: '',
   },
 
   /**
@@ -259,6 +261,14 @@ Page({
 
         })
       }
+      else if (onMessage_data.type == 6) {
+
+        that.download_record(onMessage_data, obj);
+
+
+      }
+
+
     })
 
 
@@ -374,8 +384,46 @@ Page({
     })
 
 
-  }
+  },
+  download_record: function (messge, tempmes) {
+    var _this = this;
+    const downloadTask = wx.downloadFile({
+      url: 'http://exam.alivefun.cn/download/record', //仅为示例，并非真实的资源
+      success: function (res) {
+        // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
+        console.log(res)
+        if (res.statusCode === 200) {
+          _this.setData({
+            now_record: res.tempFilePath //将下载的图片临时路径赋值给img_l,用于预览图片
+          }, function () {
+            tempmes.push({
+              username: messge.username,
+              time: messge.time,
+              type: messge.type,
+              src: res.tempFilePath
 
+            })
+            _this.setData({
+              messageList: tempmes
+            }, function () {
+              this.setData({
+                scrollTop: _this.data.scrollTop + 50
+              })
+
+            })
+
+          })
+        }
+      }
+    })
+  },
+  play_record_msg: function (e) {
+    let query = e.currentTarget.dataset['index'];
+    innerAudioContext.src = this.data.messageList[query].src;
+    innerAudioContext.play();
+
+
+  }
 
 
 })

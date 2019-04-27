@@ -32,7 +32,8 @@ Page({
     isRecode:false,
     voice_ing_start_date:0,
     now_record:'',
-
+    live_png:'../../asserts/unstart.png',
+    live_ppt_png:'',
   },
 
   /**
@@ -299,6 +300,13 @@ Page({
             that.download_record(onMessage_data,obj);
 
 
+      }
+      else if(onMessage_data.type==7){
+
+            that.setData({
+              live_ppt_png:onMessage_data.src
+            })
+        
       }
     })
 

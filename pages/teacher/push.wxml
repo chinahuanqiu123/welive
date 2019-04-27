@@ -52,8 +52,14 @@
     scroll-into-view="{{toView}}"
     scroll-top="{{scrollTop}}"
   >
-    <view wx:for="{{messageList}}">
+     <view wx:for="{{messageList}}">
+    <view wx:if="{{item.type==1}}">
     <i-cell title="{{item.username}}-{{item.time}}:{{item.message}}" is-link></i-cell>
+    </view>
+    <view wx:if="{{item.type==6}}">
+   
+        <i-button data-index="{{index}}" bind:click="play_record_msg" type="success"  shape="circle" size="small">{{item.username}}的语音消息</i-button>
+    </view>
     </view>
 </scroll-view>  
 </i-cell-group>

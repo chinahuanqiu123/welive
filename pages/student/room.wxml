@@ -15,13 +15,13 @@
   style="width:750rpx; height: 435rpx;"
 >
 <cover-view class="controls" wx:if="{{!on_live}}">
-<cover-image src='../../asserts/unstart.png'></cover-image>
+<cover-image  src='{{live_png}}'></cover-image>
 </cover-view>
 <cover-view  wx:if="{{!on_live}}" style="color:green;text-align:center">直播暂未开始</cover-view>
 </live-player>
-
+<image  style="width:100%;background-color:black;" mode="scaleToFill"
+ wx:if="{{live_ppt_png!=''?true:false}}" src='{{live_ppt_png}}'></image>
 <view>
-
 
 <i-notice-bar>
  <i-tag 
@@ -64,7 +64,7 @@
     </view>
     <view wx:if="{{item.type==6}}">
    
-        <i-button data-index="{{index}}" bind:click="play_record_msg" type="success"  shape="circle" size="small">语音消息</i-button>
+        <i-button data-index="{{index}}" bind:click="play_record_msg" type="success"  shape="circle" size="small">{{item.username}}的语音消息</i-button>
     </view>
     </view>
 </scroll-view>  
