@@ -497,6 +497,50 @@ Page({
 
     }
 
+  },
+  send_ppt_info:function(e){
+    let query = e.currentTarget.dataset['info'];
+    if(query=='unknow'){
+      var that = this;
+      wx.request({
+        url: 'http://exam.alivefun.cn/live/ppt/info', // 仅为示例，并非真实的接口地址
+        method: 'POST',
+        header: {
+          'content-type': 'application/json' // 默认值
+        },
+        data:{
+          course_id:that.data.roomid,
+          ppt:that.data.live_ppt_list[now_ppt_index].src,
+          know:0,
+          student_id:that.data.studentinfo.id
+        },
+        success(res) {
+
+        }
+      })
+    }
+    if (query == 'know') {
+      var that = this;
+      wx.request({
+        url: 'http://exam.alivefun.cn/live/ppt/info', // 仅为示例，并非真实的接口地址
+        method: 'POST',
+        header: {
+          'content-type': 'application/json' // 默认值
+        },
+        data: {
+          course_id: that.data.roomid,
+          ppt: that.data.live_ppt_list[now_ppt_index].src,
+          know: 1,
+          student_id: that.data.studentinfo.id
+        },
+        success(res) {
+      
+        }
+      })
+    }
+
+
   }
+
 
 })
