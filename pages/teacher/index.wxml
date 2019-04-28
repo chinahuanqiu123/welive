@@ -72,10 +72,15 @@
    </navigator>
     </i-grid-item>
     <i-grid-item>
+     <navigator
+    url="/pages/teacher/ppt"
+    hover-class="navigator-hover"
+  >
        <i-grid-icon>
             <i-icon type="document" size="28" color="green" />
         </i-grid-icon>
-        <i-grid-label>直播</i-grid-label>
+        <i-grid-label>PPT</i-grid-label>
+      </navigator>
     </i-grid-item>
      <i-grid-item>
        <i-grid-icon>

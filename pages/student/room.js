@@ -534,7 +534,7 @@ Page({
           student_id: that.data.studentinfo.id
         },
         success(res) {
-      
+             
         }
       })
     }

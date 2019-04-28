@@ -10,7 +10,8 @@
     "pages/teacher/paper",
     "pages/teacher/paper_detail",
     "pages/teacher/push",
-    "pages/teacher/live"
+    "pages/teacher/live",
+    "pages/teacher/ppt"
   ],
   "window": {
     "backgroundTextStyle": "light",

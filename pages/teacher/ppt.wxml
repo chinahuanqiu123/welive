@@ -1,0 +1,22 @@
+<view wx:for="{{pptinfo}}">
+<i-divider  color="#2d8cf0" lineColor="#2d8cf0">{{index}}</i-divider>
+<image src="{{index}}" mode='scaleToFill' style='width:100%;'></image>
+<i-alert type="warning">
+    不懂学生
+    <view slot="desc">总数：{{pptinfo[index][0].length}}</view>
+</i-alert>
+<i-cell-group>
+<view wx:for="{{pptinfo[index][0]}}" wx:for-item="person">
+    <i-cell title="{{person.student.name}}-{{person.student.no}}" is-link></i-cell>
+</view>
+</i-cell-group>
+<i-alert type="success">
+    懂学生
+    <view slot="desc">总数：{{pptinfo[index][1].length}}</view>
+</i-alert>
+<i-cell-group>
+<view wx:for="{{pptinfo[index][1]}}" wx:for-item="person">
+    <i-cell title="{{person.student.name}}-{{person.student.no}}" is-link></i-cell>
+</view>
+</i-cell-group>
+</view>

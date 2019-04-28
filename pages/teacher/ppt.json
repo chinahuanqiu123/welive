@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+"i-cell-group": "../../dist/cell-group/index",
+"i-cell": "../../dist/cell/index",
+"i-alert": "../../dist/alert/index",
+"i-divider": "../../dist/divider/index"
+
+  }
+}
