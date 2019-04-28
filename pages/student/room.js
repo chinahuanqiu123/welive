@@ -4,6 +4,7 @@ var frameBuffer_Data, session, SocketTask,string_base64;
 var recorder = wx.getRecorderManager();
 const innerAudioContext = wx.createInnerAudioContext() 
 var url = 'ws://socket.alivefun.cn';
+var now_ppt_index;
 Page({
 
   /**
@@ -34,6 +35,9 @@ Page({
     now_record:'',
     live_png:'../../asserts/unstart.png',
     live_ppt_png:'',
+    live_ppt_list:[],
+    back_ppt_time:0,
+    next_ppt_time: 0,
   },
 
   /**
@@ -167,6 +171,7 @@ Page({
   // 页面加载完成
   onReady: function () {
     this.on_recorder();
+
   },
   livestatechange:function(e){
     var that=this;
@@ -215,6 +220,7 @@ Page({
       },
     })
     var obj = [];
+    var temp_pic=[];
     var that = this;
     SocketTask.onOpen(res => {
       socketOpen = true;
@@ -302,9 +308,13 @@ Page({
 
       }
       else if(onMessage_data.type==7){
-
+            temp_pic.push(onMessage_data);
             that.setData({
-              live_ppt_png:onMessage_data.src
+              live_ppt_png:onMessage_data.src,
+              live_ppt_list:temp_pic
+            },function(){
+              let last_index = that.data.live_ppt_list.length - 1;
+              now_ppt_index = last_index;
             })
         
       }
@@ -461,6 +471,31 @@ Page({
     innerAudioContext.src =this.data.messageList[query].src;
     innerAudioContext.play();
 
+
+  },
+  back_ppt:function(e){
+    
+    var that=this;
+    if(now_ppt_index>0){
+      now_ppt_index--;
+      console.log(now_ppt_index);
+      that.setData({
+        live_ppt_png: that.data.live_ppt_list[now_ppt_index].src
+      })
+    }
+     
+  },
+  next_ppt: function (e) {
+    var that = this;
+    let last_index = that.data.live_ppt_list.length - 1;
+    if(now_ppt_index<last_index){
+      now_ppt_index++;
+      console.log(now_ppt_index);
+      that.setData({
+        live_ppt_png: that.data.live_ppt_list[now_ppt_index].src
+      })
+
+    }
 
   }
 
