@@ -9,7 +9,7 @@ Page({
     livecourses:[],
     rec_list:[],
     rec_rate:[],
-
+    haspaper_list:[],
   },
 
   /**
@@ -33,6 +33,7 @@ Page({
        },function(){
          that.getLiveinfo();
         that.getreclive();
+        that.getpapersection();
        });
         
       },
@@ -98,6 +99,26 @@ Page({
          that.setData({
           livecourses:res.data.livecourses
          })
+
+
+      }
+    })
+
+
+  },
+  getpapersection: function () {
+    var that = this;
+    wx.request({
+      url: 'http://exam.alivefun.cn?classid='+that.data.studentinfo.section_id, // 仅为示例，并非真实的接口地址
+      method: 'GET',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+
+        that.setData({
+          haspaper_list: res.data.section
+        })
 
 
       }

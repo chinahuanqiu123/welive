@@ -11,7 +11,8 @@
     "pages/teacher/paper_detail",
     "pages/teacher/push",
     "pages/teacher/live",
-    "pages/teacher/ppt"
+    "pages/teacher/ppt",
+    "pages/student/paper"
   ],
   "window": {
     "backgroundTextStyle": "light",

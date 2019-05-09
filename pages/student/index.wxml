@@ -23,6 +23,30 @@
 </view>
 
 <i-panel title="">
+    <view style="padding: 15px;">{{studentinfo.name}}考试课程
+    <i-tag  class="i-tags" name="标签一"  type="border"  color="green">{{studentinfo.section.grade}}级{{studentinfo.section.name}}</i-tag>
+    <i-tag 
+    class="i-tags"
+    name="单个标签" 
+    color="green">
+    {{studentinfo.section.major.name}}
+</i-tag>
+    </view>
+</i-panel>
+
+<view wx:for="{{haspaper_list[0].courses}}">
+<navigator
+    url="/pages/student/paper?course_index={{index}}"
+    hover-class="navigator-hover"
+   >
+<i-card title="{{item.name}}" extra="ID:{{item.id}}" thumb="https://i.loli.net/2017/08/21/599a521472424.jpg">
+    <view slot="content">教师:{{item.teacher.name}}</view>
+    <view slot="footer">共有{{item.papers.length}}个试卷</view>
+</i-card>
+ </navigator>
+</view>
+
+<i-panel title="">
     <view style="padding: 15px;">猜你喜欢
     <i-tag  class="i-tags" name="标签一"  type="border"  color="green">{{studentinfo.section.grade}}级{{studentinfo.section.name}}</i-tag>
     <i-tag 

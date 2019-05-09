@@ -1,5 +1,11 @@
+<wxs module="util">
+    var sub = function(val) {
+        return val.substring(52, 56);
+    }
+    module.exports.sub = sub;
+</wxs>
 <view wx:for="{{pptinfo}}">
-<i-divider  color="#2d8cf0" lineColor="#2d8cf0">{{index}}</i-divider>
+<i-divider  color="green" lineColor="green">{{util.sub(index)}}</i-divider>
 <image src="{{index}}" mode='scaleToFill' style='width:100%;'></image>
 <i-alert type="warning">
     不懂学生
