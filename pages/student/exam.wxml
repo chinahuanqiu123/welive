@@ -1,0 +1,26 @@
+ 
+
+
+
+<swiper
+  indicator-dots="{{indicatorDots}}"
+  autoplay="{{autoplay}}"
+  interval="{{interval}}"
+  duration="{{duration}}"
+
+>
+  <block wx:for="{{choicelist}}" >
+    <swiper-item wx:key="{{index}}">
+ <i-panel  title="{{index}}-{{item.name}}">    
+<i-radio-group current="{{currentchoice[index]}}" data-index="{{index}}" bindchange="handleFruitChange">
+        <i-radio wx:key="1"  position="{{position}}"  value="{{item.choice_a}}"> </i-radio>
+        <i-radio wx:key="2" position="{{position}}"  value="{{item.choice_b}}"> </i-radio>
+        <i-radio wx:key="3" position="{{position}}"  value="{{item.choice_c}}"> </i-radio>
+        <i-radio wx:key="4" position="{{position}}"  value="{{item.choice_d}}"> </i-radio>
+    </i-radio-group>
+ </i-panel>
+
+    </swiper-item>
+  </block>
+</swiper>
+<i-button bind:click="submit" type="ghost">交卷</i-button>

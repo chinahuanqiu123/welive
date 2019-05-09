@@ -5,14 +5,25 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+     courseinfo:{},
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that=this;
+      var courseindex=options.course_index;
+      wx.getStorage({
+        key: 'paper_courses',
+        success: function(res) {
+          that.setData({
+            courseinfo:res.data[courseindex]
+           })
 
+        },
+      })
+     
   },
 
   /**

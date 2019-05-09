@@ -118,6 +118,12 @@ Page({
 
         that.setData({
           haspaper_list: res.data.section
+        },function(){
+         wx.setStorage({
+           key: 'paper_courses',
+           data: res.data.section[0].courses,
+         })
+
         })
 
 

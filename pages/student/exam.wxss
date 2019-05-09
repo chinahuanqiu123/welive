@@ -1,0 +1,6 @@
+/* pages/student/exam.wxss */
+swiper {
+display:block;
+height:50vh;
+
+}

@@ -1,2 +1,11 @@
-<!--pages/student/paper.wxml-->
-<text>pages/student/paper.wxml</text>
+<i-panel title="">
+    <view style="padding: 15px;">课程：{{courseinfo.name}}
+    <i-tag  class="i-tags" name="标签一"  type="border"  color="green">授课教师-{{courseinfo.teacher.name}}</i-tag>
+  
+    </view>
+</i-panel>
+<i-cell-group wx:for="{{courseinfo.papers}}">
+
+    <i-cell title="{{item.name}}" is-link url="/pages/student/exam?index={{item.id}}"></i-cell>
+
+</i-cell-group>
