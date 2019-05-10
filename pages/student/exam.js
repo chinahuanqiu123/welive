@@ -132,7 +132,7 @@ Page({
     }
 
     wx.request({
-      url: 'http://exam.alivefun.cn/paper/choice/record/'+pid, 
+      url: 'http://horizon.alivefun.cn/paper/'+pid+'/record', 
       method: 'POST',
       data:{
         choice_record:choice_record,
@@ -143,7 +143,11 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success(res) {
-
+        wx.showToast({
+          title: '交卷成功',
+          icon: 'success',
+          duration: 2000
+        })
        
       }
     })
