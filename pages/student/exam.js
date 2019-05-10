@@ -136,7 +136,8 @@ Page({
       method: 'POST',
       data:{
         choice_record:choice_record,
-        userid:that.data.userinfo.id
+        userid:that.data.userinfo.id,
+        paperid:pid
 
       },
       header: {
