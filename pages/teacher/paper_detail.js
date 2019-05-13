@@ -8,7 +8,7 @@ Page({
       courseinfo:'',
       tab: '1',
       tab1: true,
-
+      choiceinfo:[],
 
   },
 
@@ -19,14 +19,58 @@ Page({
 
     var that = this;   
     var option=options.course_index
-
+    var historychoice=[];
+    var historyanswer=[];
     wx.getStorage({
       key: 'papercourses',
       success: function (res) {
         that.setData({
           courseinfo: res.data[option]
-        })
+        },function(){
+          var re2 = that.data.courseinfo.papers;
+          re2.forEach(function (value, index1, arrSelf) {
+            
+            value.paperrecords.forEach(function (item, index2, arrSelf){
+              const choice_answer= item.choice.split(',');
+               choice_answer.forEach(function(the_answer,index3,myself){
+                 if(index3<myself.length-1){
+                   const temphis = the_answer.split(':')[0];
+                   const tempanswer = the_answer.split(':')[1];
+                   historychoice.push(temphis);
+                   historyanswer.push(tempanswer);
+                 }
+               })       
+                console.log(historychoice);
+                item['choice_answer']=choice_answer;
+                that.setData({
+                  papers:re2
+                },function(){
+                  wx.request({
+                    url: 'http://exam.alivefun.cn/paper/record/deal', // 仅为示例，并非真实的接口地址
+                    method: 'POST',
+                    header: {
+                      'content-type': 'application/json' // 默认值
+                    },
+                    data:{
+                      historychoice:historychoice
+                    },
+                    success(res) {  
+                         const re=res.data.choiceinfo;
+                         re.forEach(function(value,index){
+                           re[index]['user_answer']=historyanswer[index];
+                         })
+                         that.setData({
+                          choiceinfo:re
+                         })
+                    }
+                  })
 
+
+                })
+            })
+         
+          })
+        })
       },
     })
 
