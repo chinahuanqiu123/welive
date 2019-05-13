@@ -137,7 +137,8 @@ Page({
       data:{
         choice_record:choice_record,
         userid:that.data.userinfo.id,
-        paperid:pid
+        paperid:pid,
+        username:that.data.userinfo.name
 
       },
       header: {

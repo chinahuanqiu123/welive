@@ -26,5 +26,25 @@
 </i-cell-group>
 </view>
 <view wx:if="{{tab3}}" class='tab3'>
-3
+<scroll-view
+    scroll-y
+    style="height: 200vh;"
+  >
+  <i-collapse name="{{name}}">
+  <block wx:for="{{courseinfo.papers}}" wx:for-item="paper">
+        <i-collapse-item title="{{paper.name}}" name="name1">
+            <view slot="content">
+            <block wx:for="{{paper.paperrecords}}" wx:for-item="record">
+             {{record.choice}}
+            </block>
+            </view>
+        </i-collapse-item>
+  </block>
+  </i-collapse>
+ 
+
+   
+
+
+ </scroll-view>
 </view>
