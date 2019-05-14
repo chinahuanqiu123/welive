@@ -31,12 +31,27 @@
     style="height: 200vh;"
   >
   <i-collapse name="{{name}}">
-  <block wx:for="{{courseinfo.papers}}" wx:for-item="paper">
-        <i-collapse-item title="{{paper.name}}" name="name1">
+  <block wx:for="{{finalhistory}}" wx:for-item="paper"  wx:for-index="paper_index">
+  
+        <i-collapse-item title="试卷ID:{{paper_index}}" name="{{paper_index}}">
             <view slot="content">
-            <block wx:for="{{paper.paperrecords}}" wx:for-item="record">
-             {{record.choice}}
+         
+            <block wx:for="{{paper}}" wx:for-item="student_record" wx:for-index="student_index" >
+            {{student_record[0]['studentname']}}
+             <block wx:for="{{student_record}}" wx:for-item="choice_record" wx:for-index="choice_index" >
+             <view>{{choice_record['name']}}</view>
+             <i-radio-group current="{{}}" bindchange="handleFruitChange">
+               <i-radio position="{{position}}" wx:key="1" value="{{choice_record['choice_a']}}"> </i-radio>
+               <i-radio position="{{position}}" wx:key="2" value="{{choice_record['choice_b']}}"> </i-radio>
+               <i-radio position="{{position}}" wx:key="3" value="{{choice_record['choice_c']}}"> </i-radio>
+               <i-radio position="{{position}}" wx:key="4" value="{{choice_record['choice_d']}}"> </i-radio>
+            </i-radio-group>
+             </block>
+              
+          
+            
             </block>
+            
             </view>
         </i-collapse-item>
   </block>

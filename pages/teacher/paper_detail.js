@@ -9,7 +9,9 @@ Page({
       tab: '1',
       tab1: true,
       choiceinfo:[],
-
+      name2:'',
+      name:'',
+      i:0,
   },
 
   /**
@@ -21,6 +23,8 @@ Page({
     var option=options.course_index
     var historychoice=[];
     var historyanswer=[];
+    var history=[];
+    var re;
     wx.getStorage({
       key: 'papercourses',
       success: function (res) {
@@ -55,19 +59,30 @@ Page({
                       historychoice:historychoice
                     },
                     success(res) {  
-                         const re=res.data.choiceinfo;
+                         re=res.data.choiceinfo;
                          re.forEach(function(value,index){
                            re[index]['user_answer']=historyanswer[index];
+                           re[index]['studentname'] =that.data.papers[index1].paperrecords[index2].student.name;
+                           re[index]['studentid'] = that.data.papers[index1].paperrecords[index2].student.id;
+                           re[index]['paper_name'] = that.data.papers[index1].name
                          })
-                         that.setData({
-                          choiceinfo:re
-                         })
+                      that.setData({
+                        choiceinfo:re
+                      },function(){
+
+                        that.grouphistory(re);
+
+                      })
                     }
                   })
 
 
                 })
+             //    
+             
             })
+            
+
          
           })
         })
@@ -75,7 +90,7 @@ Page({
     })
 
   },
-
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -89,7 +104,26 @@ Page({
   onShow: function () {
 
   },
+  grouphistory:function(re){
+    var that=this;
+    wx.request({
+      url: 'http://exam.alivefun.cn/paper/record/group', // 仅为示例，并非真实的接口地址
+      method: 'POST',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      data: {
+        history: re
+      },
+      success(res) {
+            that.setData({
+              finalhistory: res.data.grouppaperrecords
+            })
+      }
+    })
 
+
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
