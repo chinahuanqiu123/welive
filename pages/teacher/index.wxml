@@ -15,13 +15,13 @@
        <i-grid-icon>
             <i-avatar i-class='icon_num'  shape="square">{{papercourses.length}}</i-avatar>
         </i-grid-icon>
-        <i-grid-label>直播总数</i-grid-label>
+        <i-grid-label>考试</i-grid-label>
     </i-grid-item>
      <i-grid-item>
        <i-grid-icon>
           <i-avatar i-class='icon_num'  shape="square">{{livecourses.length}}</i-avatar>
         </i-grid-icon>
-        <i-grid-label>考试</i-grid-label>
+        <i-grid-label>直播总数</i-grid-label>
     </i-grid-item>
 </i-grid>
 <i-grid>

@@ -33,7 +33,8 @@
   <i-collapse name="{{name}}">
   <block wx:for="{{finalhistory}}" wx:for-item="paper"  wx:for-index="paper_index">
   
-        <i-collapse-item title="试卷ID:{{paper_index}}" name="{{paper_index}}">
+        <i-collapse-item i-class="coll_title" title="试卷ID:{{paperlist[paper_index][0].name}}" 
+        name="{{paper_index}}">
             <view slot="content">
          
             <block wx:for="{{paper}}" wx:for-item="student_record" wx:for-index="student_index" >

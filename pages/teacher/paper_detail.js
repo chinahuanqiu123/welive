@@ -12,6 +12,7 @@ Page({
       name2:'',
       name:'',
       i:0,
+      paperlist:[],
   },
 
   /**
@@ -56,7 +57,8 @@ Page({
                       'content-type': 'application/json' // 默认值
                     },
                     data:{
-                      historychoice:historychoice
+                      historychoice:historychoice,
+                      paper_id:value.id
                     },
                     success(res) {  
                          re=res.data.choiceinfo;
@@ -69,7 +71,7 @@ Page({
                       that.setData({
                         choiceinfo:re
                       },function(){
-
+                        that.getpaperlist();
                         that.grouphistory(re);
 
                       })
@@ -119,6 +121,24 @@ Page({
             that.setData({
               finalhistory: res.data.grouppaperrecords
             })
+      }
+    })
+
+
+  },
+  getpaperlist:function(){
+
+    var that = this;
+    wx.request({
+      url: 'http://exam.alivefun.cn/paper/list', // 仅为示例，并非真实的接口地址
+      method: 'GET',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        that.setData({
+            paperlist: res.data.paperlist
+        })
       }
     })
 
