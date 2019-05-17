@@ -26,7 +26,7 @@ Page({
     questions:[],
     resourcequestion:[],
     livecourses:[],
-    live_course_index:'',
+    live_course_index:0,
     latestudents:[],
     allstudents:[],
     now_record: '',
@@ -63,11 +63,11 @@ Page({
              targetTime: new Date(that.data.livecourses[options.index].liveroom.live_time).getTime()
 
            })
-
+            that.changestate(1);
           })
         },
       })
-
+       
 
     })
 
@@ -125,6 +125,7 @@ Page({
       success: function () {
         SocketTask.close(function (close) {
           console.log('关闭 WebSocket 连接。', close)
+         
         })
 
       }
@@ -132,7 +133,7 @@ Page({
 
 
   },
-  msgInput: function (e) {
+  bindmsgInput: function (e) {
 
     this.setData({
       msg: e.detail.value
@@ -164,8 +165,23 @@ Page({
   onShow: function () {
 
 
+  },
+  changestate:function(state){
+    var that = this;
+    wx.request({
+      url: 'http://exam.alivefun.cn/live/state/change', // 仅为示例，并非真实的接口地址
+      method: 'POST',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      data: {
+        id: that.data.livecourses[that.data.live_course_index].liveroom.id,
+        live_state:state
+      },
+      success(res) {
 
-
+      }
+    })
 
 
   },
@@ -232,7 +248,7 @@ Page({
     SocketTask.onClose(onClose => {
       console.log('监听 WebSocket 连接关闭事件。', onClose)
       socketOpen = false;
-
+      that.changestate(0);
     })
     SocketTask.onError(onError => {
       console.log('监听 WebSocket 错误。错误信息', onError)

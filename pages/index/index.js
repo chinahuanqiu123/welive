@@ -56,7 +56,14 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success(res) {
-        
+        if (res.data.student_info ==null){
+          wx.showToast({
+            title: '登录信息有误!',
+            icon: 'loading',
+            duration: 2000
+          })
+          return 0;
+        }
         wx.setStorageSync('userinfo',res.data.student_info)
         wx.setStorageSync('role', that.data.role?'student':'teacher')
               if (that.data.role) {
@@ -98,19 +105,24 @@ Page({
       })
       return 0;
     }
-    var that=this;
+  
+  },
+  onReady:function(){
+    var that = this;
     wx.request({
       url: 'http://exam.alivefun.cn/college/show/', // 仅为示例，并非真实的接口地址
-      type:'GET',
+      type: 'GET',
       header: {
         'content-type': 'application/json' // 默认值
       },
       success(res) {
         that.setData({
-          college_list:res.data.college_list
+          college_list: res.data.college_list
         })
       }
     })
+
+
   },
   getUserInfo: function(e) {
     console.log(e)

@@ -115,7 +115,7 @@ Page({
      
    
   },
-   msgInput:function(e){
+  bindmsgInput:function(e){
 
     this.setData({
        msg:e.detail.value

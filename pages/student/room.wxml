@@ -75,7 +75,7 @@
     </view>
 </scroll-view>  
 </i-cell-group>
- <i-input value="{{ msg }}" type="text" mode="wrapped" bind:change="msginput" placeholder="我想说..." />
+<input value="{{ msg }}" maxlength="15" bindinput="bindmsgInput" type="text" title="密码" placeholder="我想说..." />
 <button type="primary"   bindtap="sendMsg">发送</button>
 <button type="primary" bindtouchstart="startRecode" bindtouchend="endRecode" class="cxbtn">按住录音</button>
 </view>

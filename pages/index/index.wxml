@@ -16,5 +16,5 @@
     </picker-view-column>
     </picker-view>
     
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    
 </view>
