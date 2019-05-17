@@ -113,5 +113,15 @@
     </view>
     </i-card>
 
+<i-cell-group>
+    <i-cell title="对本课程评分:">
+        <i-rate 
+            bind:change="onrateChange1" 
+            value="{{starIndex1}}">
+        </i-rate>
+    </i-cell>
+    
+   
+</i-cell-group>
 
 </view>

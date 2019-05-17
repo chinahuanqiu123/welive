@@ -38,6 +38,7 @@ Page({
     live_ppt_list:[],
     back_ppt_time:0,
     next_ppt_time: 0,
+    starIndex1: 0,
   },
 
   /**
@@ -172,6 +173,12 @@ Page({
   onReady: function () {
     this.on_recorder();
 
+  },
+  onrateChange1(e) {
+    const index = e.detail.index;
+    this.setData({
+      'starIndex1': index
+    })
   },
   livestatechange:function(e){
     var that=this;

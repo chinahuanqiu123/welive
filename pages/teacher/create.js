@@ -6,7 +6,7 @@ Page({
    */
   data: {
     teacherinfo:'',
-    course_value:'',
+    course_value:[0],
     date:'',
     time:''
 
@@ -114,8 +114,10 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success(res) {
-        that.setData({
-          papercourses: res.data.has_paper_courses
+        wx.showToast({
+          title: '',
+          icon: 'success',
+          duration: 2000
         })
       }
     })
