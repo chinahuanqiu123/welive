@@ -103,7 +103,7 @@ Page({
   sendLiveinfo:function(){
     var that = this;
     wx.request({
-      url: 'http://exam.alivefun.cn/live/save',
+      url: 'https://exam.alivefun.cn/live/save',
       method: 'POST',
       data:{  
         course_id:that.data.teacherinfo.courses[that.data.course_value]['id'],

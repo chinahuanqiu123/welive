@@ -66,7 +66,7 @@ Page({
  getpptinfo:function(){
    var that=this;
    wx.request({
-     url: 'http://exam.alivefun.cn/live/7/pptinfo', // 仅为示例，并非真实的接口地址
+     url: 'https://exam.alivefun.cn/live/7/pptinfo', // 仅为示例，并非真实的接口地址
      method: 'GET',
      header: {
        'content-type': 'application/json' // 默认值

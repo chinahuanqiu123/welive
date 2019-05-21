@@ -132,7 +132,7 @@ Page({
     }
 
     wx.request({
-      url: 'http://horizon.alivefun.cn/paper/'+pid+'/record', 
+      url: 'https://horizon.alivefun.cn/paper/'+pid+'/record', 
       method: 'POST',
       data:{
         choice_record:choice_record,
@@ -160,7 +160,7 @@ Page({
   getchoice: function (pid) {
     var that = this;
     wx.request({
-      url: 'http://exam.alivefun.cn/paper/choice/'+pid, // 仅为示例，并非真实的接口地址
+      url: 'https://exam.alivefun.cn/paper/choice/'+pid, // 仅为示例，并非真实的接口地址
       method: 'POST',
       header: {
         'content-type': 'application/json' // 默认值

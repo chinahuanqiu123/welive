@@ -86,7 +86,7 @@ Page({
   getLiveinfo:function(){
      var that=this;
     wx.request({
-      url: 'http://exam.alivefun.cn/live/', // 仅为示例，并非真实的接口地址
+      url: 'https://exam.alivefun.cn/live/', // 仅为示例，并非真实的接口地址
       data: {
         class_id:that.data.studentinfo.section_id
       },
@@ -109,7 +109,7 @@ Page({
   getpapersection: function () {
     var that = this;
     wx.request({
-      url: 'http://exam.alivefun.cn?classid='+that.data.studentinfo.section_id, // 仅为示例，并非真实的接口地址
+      url: 'https://exam.alivefun.cn?classid='+that.data.studentinfo.section_id, // 仅为示例，并非真实的接口地址
       method: 'GET',
       header: {
         'content-type': 'application/json' // 默认值
@@ -135,7 +135,7 @@ Page({
   getreclive:function(){
     var that = this;
     wx.request({
-      url: 'http://exam.alivefun.cn/live/recommend', // 仅为示例，并非真实的接口地址
+      url: 'https://exam.alivefun.cn/live/recommend', // 仅为示例，并非真实的接口地址
       method: 'POST',
       header: {
         'content-type': 'application/json' // 默认值

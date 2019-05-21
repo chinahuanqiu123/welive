@@ -51,7 +51,7 @@ Page({
                   papers:re2
                 },function(){
                   wx.request({
-                    url: 'http://exam.alivefun.cn/paper/record/deal', // 仅为示例，并非真实的接口地址
+                    url: 'https://exam.alivefun.cn/paper/record/deal', // 仅为示例，并非真实的接口地址
                     method: 'POST',
                     header: {
                       'content-type': 'application/json' // 默认值
@@ -109,7 +109,7 @@ Page({
   grouphistory:function(re){
     var that=this;
     wx.request({
-      url: 'http://exam.alivefun.cn/paper/record/group', // 仅为示例，并非真实的接口地址
+      url: 'https://exam.alivefun.cn/paper/record/group', // 仅为示例，并非真实的接口地址
       method: 'POST',
       header: {
         'content-type': 'application/json' // 默认值
@@ -130,7 +130,7 @@ Page({
 
     var that = this;
     wx.request({
-      url: 'http://exam.alivefun.cn/paper/list', // 仅为示例，并非真实的接口地址
+      url: 'https://exam.alivefun.cn/paper/list', // 仅为示例，并非真实的接口地址
       method: 'GET',
       header: {
         'content-type': 'application/json' // 默认值

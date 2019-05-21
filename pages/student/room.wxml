@@ -100,7 +100,7 @@
 <view wx:if="{{tab3}}" class='tab3'>
 
    
-    <i-card title="卡片标题" extra="额外内容" thumb="https://i.loli.net/2017/08/21/599a521472424.jpg">
+    <i-card title="课程直播中" extra="公告" thumb="https://i.loli.net/2017/08/21/599a521472424.jpg">
     <view slot="content"></view>
     <view slot="footer">
     距离课程开播还有：

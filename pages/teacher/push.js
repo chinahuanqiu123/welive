@@ -2,7 +2,7 @@
 var socketOpen = true;
 var frameBuffer_Data, session, SocketTask;
 const innerAudioContext = wx.createInnerAudioContext() 
-var url = 'ws://socket.alivefun.cn';
+var url = 'wss://socket.alivefun.cn';
 Page({
 
   /**
@@ -169,7 +169,7 @@ Page({
   changestate:function(state){
     var that = this;
     wx.request({
-      url: 'http://exam.alivefun.cn/live/state/change', // 仅为示例，并非真实的接口地址
+      url: 'https://exam.alivefun.cn/live/state/change', // 仅为示例，并非真实的接口地址
       method: 'POST',
       header: {
         'content-type': 'application/json' // 默认值
@@ -292,7 +292,7 @@ Page({
   getNumber: function () {
     var that = this;
     wx.request({
-      url: 'http://exam.alivefun.cn/live/' + that.data.roomid + '/members', // 仅为示例，并非真实的接口地址
+      url: 'https://exam.alivefun.cn/live/' + that.data.roomid + '/members', // 仅为示例，并非真实的接口地址
       method: 'GET',
       header: {
         'content-type': 'application/json' // 默认值
@@ -359,7 +359,7 @@ Page({
     var con=[];
     var that = this;
     wx.request({
-      url: 'http://exam.alivefun.cn/live/' + that.data.roomid + '/questions', // 仅为示例，并非真实的接口地址
+      url: 'https://exam.alivefun.cn/live/' + that.data.roomid + '/questions', // 仅为示例，并非真实的接口地址
       method: 'GET',
       header: {
         'content-type': 'application/json' // 默认值
@@ -404,7 +404,7 @@ Page({
   download_record: function (messge, tempmes) {
     var _this = this;
     const downloadTask = wx.downloadFile({
-      url: 'http://exam.alivefun.cn/download/record', //仅为示例，并非真实的资源
+      url: 'https://exam.alivefun.cn/download/record', //仅为示例，并非真实的资源
       success: function (res) {
         // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
         console.log(res)

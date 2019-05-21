@@ -42,11 +42,13 @@
              <block wx:for="{{student_record}}" wx:for-item="choice_record" wx:for-index="choice_index" >
              <view>{{choice_record['name']}}</view>
              <i-radio-group current="{{}}" bindchange="handleFruitChange">
-               <i-radio position="{{position}}" wx:key="1" value="{{choice_record['choice_a']}}"> </i-radio>
-               <i-radio position="{{position}}" wx:key="2" value="{{choice_record['choice_b']}}"> </i-radio>
-               <i-radio position="{{position}}" wx:key="3" value="{{choice_record['choice_c']}}"> </i-radio>
-               <i-radio position="{{position}}" wx:key="4" value="{{choice_record['choice_d']}}"> </i-radio>
+               <i-radio position="{{position}}" wx:if="{{choice_record['user_answer']==1?true:false}}" wx:key="1" value="{{choice_record['choice_a']}}"> </i-radio>
+               <i-radio position="{{position}}" wx:if="{{choice_record['user_answer']==2?true:false}}" wx:key="2" value="{{choice_record['choice_b']}}"> </i-radio>
+               <i-radio position="{{position}}" wx:if="{{choice_record['user_answer']==3?true:false}}" wx:key="3" value="{{choice_record['choice_c']}}"> </i-radio>
+               <i-radio position="{{position}}" wx:if="{{choice_record['user_answer']==4?true:false}}" wx:key="4" value="{{choice_record['choice_d']}}"> </i-radio>
             </i-radio-group>
+            <view>正确答案:{{choice_record['answer']}}</view>
+            
              </block>
               
           

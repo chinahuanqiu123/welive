@@ -3,7 +3,7 @@ var socketOpen=true;
 var frameBuffer_Data, session, SocketTask,string_base64;
 var recorder = wx.getRecorderManager();
 const innerAudioContext = wx.createInnerAudioContext() 
-var url = 'ws://socket.alivefun.cn';
+var url = 'wss://socket.alivefun.cn';
 var now_ppt_index;
 Page({
 
@@ -178,6 +178,29 @@ Page({
     const index = e.detail.index;
     this.setData({
       'starIndex1': index
+    },function(){
+       
+      var that = this;
+      wx.request({
+        url: 'https://exam.alivefun.cn/live/rate/save', // 仅为示例，并非真实的接口地址
+        method: 'POST',
+        header: {
+          'content-type': 'application/json' // 默认值
+        },
+        data:{
+         uid:that.data.studentinfo.id,
+         courseid:that.data.roomid,
+         rate_value:that.data.starIndex1
+        },
+        success(res) {
+          wx.showToast({
+            title: '评价成功',
+            icon: 'success',
+            duration: 2000
+          })
+        }
+      })
+
     })
   },
   livestatechange:function(e){
@@ -287,7 +310,7 @@ Page({
           question_visable:false
         })
         wx.request({
-          url: 'http://exam.alivefun.cn/live/question/record/save',
+          url: 'https://exam.alivefun.cn/live/question/record/save',
           method:'POST',
           data: {
             student_id: that.data.studentinfo.id,
@@ -337,7 +360,7 @@ Page({
   getNumber:function(){
     var that=this;
     wx.request({
-      url: 'http://exam.alivefun.cn/live/'+that.data.roomid+'/members', // 仅为示例，并非真实的接口地址
+      url: 'https://exam.alivefun.cn/live/'+that.data.roomid+'/members', // 仅为示例，并非真实的接口地址
       method: 'GET',
       header: {
         'content-type': 'application/json' // 默认值
@@ -444,7 +467,7 @@ Page({
   download_record: function (messge,tempmes) {
     var _this = this;
     const downloadTask = wx.downloadFile({
-      url: 'http://exam.alivefun.cn/download/record', //仅为示例，并非真实的资源
+      url: 'https://exam.alivefun.cn/download/record', //仅为示例，并非真实的资源
       success: function (res) {
         // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
         console.log(res)
@@ -510,7 +533,7 @@ Page({
     if(query=='unknow'){
       var that = this;
       wx.request({
-        url: 'http://exam.alivefun.cn/live/ppt/info', // 仅为示例，并非真实的接口地址
+        url: 'https://exam.alivefun.cn/live/ppt/info', // 仅为示例，并非真实的接口地址
         method: 'POST',
         header: {
           'content-type': 'application/json' // 默认值
@@ -529,7 +552,7 @@ Page({
     if (query == 'know') {
       var that = this;
       wx.request({
-        url: 'http://exam.alivefun.cn/live/ppt/info', // 仅为示例，并非真实的接口地址
+        url: 'https://exam.alivefun.cn/live/ppt/info', // 仅为示例，并非真实的接口地址
         method: 'POST',
         header: {
           'content-type': 'application/json' // 默认值

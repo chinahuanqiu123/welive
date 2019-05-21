@@ -96,7 +96,7 @@ Page({
   getpaper_courses:function(){
      var that=this;
     wx.request({
-      url: 'http://exam.alivefun.cn/teacher/' + that.data.teacherinfo.id + '/mypapercourses',
+      url: 'https://exam.alivefun.cn/teacher/' + that.data.teacherinfo.id + '/mypapercourses',
       method:'GET',
       header: {
         'content-type': 'application/json' // 默认值
@@ -119,7 +119,7 @@ Page({
   getlive_courses:function(){
     var that = this;
     wx.request({
-      url: 'http://exam.alivefun.cn//teacher/'+that.data.teacherinfo.id+'/mylivecourses' ,
+      url: 'https://exam.alivefun.cn//teacher/'+that.data.teacherinfo.id+'/mylivecourses' ,
       method: 'GET',
       header: {
         'content-type': 'application/json' // 默认值

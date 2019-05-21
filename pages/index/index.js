@@ -44,7 +44,7 @@ Page({
   handleloginClick:function(){
     var that=this;
     wx.request({
-      url: 'http://exam.alivefun.cn/live/getmysection', // 仅为示例，并非真实的接口地址
+      url: 'https://exam.alivefun.cn/live/getmysection', // 仅为示例，并非真实的接口地址
       data: {
         sid: that.data.no,
         password:that.data.password,
@@ -110,7 +110,7 @@ Page({
   onReady:function(){
     var that = this;
     wx.request({
-      url: 'http://exam.alivefun.cn/college/show/', // 仅为示例，并非真实的接口地址
+      url: 'https://exam.alivefun.cn/college/show/', // 仅为示例，并非真实的接口地址
       type: 'GET',
       header: {
         'content-type': 'application/json' // 默认值
